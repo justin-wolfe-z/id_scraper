@@ -1,10 +1,21 @@
 <h1>ID Scraper</h1>
 <p>A bookmarklet for scraping IDs from a Zap Editor dropdown into a CSV you can share with a customer</p>
 
-Drag this link to your bookmark bar:
-
+<p>Drag this bookmarklet link to your bookmark bar:</p>
+<br>
 <a href="javascript:(function()%7Bvar%20outputCSV%20%3D%20'%22Label%22%2C%22ID%22%5Cn'%3Bvar%20outputHTML%20%3D%20'%22Label%22%2C%22ID%22%3Cbr%3E'%3Bvar%20chunk%20%3D%20window.location.pathname.split(%22nodes%2F%22)%3Bvar%20smallerChunk%20%3D%20chunk%5B1%5D.split(%22%2F%22)%3Bvar%20outputNode%20%3D%20smallerChunk%5B0%5D%3B%24(%22.choices%22).children().each(function()%7Bvar%20value%20%3D%20%24(this).find(%22.choice-sample%22).text()%3Bif(value)%7Bvar%20key%20%3D%20%24(this).find(%22.choice-label%22).children().first().children().first().text()%3Bvar%20outputRow%20%3D%20'%22'%2Bkey%2B'%22%2C'%2B'%22'%2Bvalue%2B'%22'%3BoutputCSV%20%2B%3D%20outputRow%20%2B%20%22%5Cr%5Cn%22%3BoutputHTML%20%2B%3D%20outputRow%20%2B%20%22%3Cbr%3E%22%3B%7D%7D)%3Bvar%20username%20%3D%20prompt(%22What's%20your%20Slack%20username%3F%22)%3Bif(username)%7B%24.get(%20%22https%3A%2F%2Fhooks.zapier.com%2Fhooks%2Fcatch%2F2003878%2Fzyunoo%2F%22%2C%20%7B%20slack%3A%20username%2C%20node%3A%20outputNode%2C%20csv%3A%20outputCSV%20%7D).done(function()%7Balert(%22Successfully%20sent%20to%20Zapbot!%20You'll%20get%20a%20DM%20with%20a%20link%20to%20your%20CSV%20in%20just%20a%20sec%22)%3B%7D).fail(function()%7Balert(%22Bargle!%20GET%20request%20to%20Zapier%20failed%2C%20probably%20because%20the%20CSV%20is%20too%20long%20%3A(.%20No%20worries%2C%20I'm%20going%20to%20open%20two%20new%20tabs%E2%80%94one%20with%20the%20CSV%20for%20you%20to%20copy%20and%20one%20for%20a%20form%20where%20you'll%20paste%20that%20CSV%20in!%22)%3Bwindow.open(%22https%3A%2F%2Fzapier.formstack.com%2Fforms%2Fcsv_generator_backup%3Fslack%3D%22%2Busername%2B%22%26node%3D%22%2BoutputNode)%3Bwindow.open().document.write(outputHTML)%3B%7D)%7D%7D)()">Gimme IDs</a>
+<br>
+<p>Then, when you need to scrape some IDs from a Zap dropdown:</p>
+<ol>
+  <li>Open the dropdown you want to scrape.</li>
+  <li>Scroll down and click the "Check [app] and reload to bring in new choices" button if you want to pull in more choices before exporting.</li>
+  <li>Click on the bookmarklet</li>
+  <li>You'll be prompted for your Slack username—enter that and click OK</li>
+  <li>The bookmarklet will try to send the CSV to a Zap then get one of two notifications:
+  <li>
+    <ol>
+      <li>If the list is relatively short, a Zap will automatically create the CSV and send you a link in a Slack DM</li>
+      <li>If the list is too long to send in a GET request, the Zap will alert you to this fact, then open two new tabs: a) a tab containing the contents of the CSV and b) a Formstack form. Copy the contents of the CSV into the field provided in the form and submit the form. A Zap will automatically create the CSV and send you a link in a Slack DM
+    </ol>
+  </li>
 
-Then, when you need to scrape some IDs from a Zap dropdown:
-1. Open the dropdown
-2. Scroll down and click the "Check [app] and reload to bring in new choices" button if you want to pull in more choices before exporting

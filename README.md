@@ -1,4 +1,3 @@
 # id_scraper
 bookmarklet for scraping some IDs from a Zap dropdown
 
-<a href="test"></a>

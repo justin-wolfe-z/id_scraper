@@ -12,15 +12,15 @@ $(".choices").children().each(function(){
       outputHTML += outputRow + "<br>";
     }
 });
-var username = prompt("What's your Zapier email?");
-if(username){
-  $.get( "https://hooks.zapier.com/hooks/catch/2003878/zyunoo/", { slack: username, node: outputNode, csv: outputCSV }) 
+var email = prompt("What's your Zapier email?");
+if(email){
+  $.get( "https://hooks.zapier.com/hooks/catch/2003878/zyunoo/", { email: email, node: outputNode, csv: outputCSV }) 
   .done(function(){
     alert("Successfully sent to Zapbot! You'll get a DM with a link to your CSV in just a sec");
   })
   .fail(function(){
     alert("Bargle! GET request to Zapier failed, probably because the CSV is too long :(. No worries, I'm going to open two new tabs—one with the CSV for you to copy and one for a form where you'll paste that CSV in!");
-    window.open("https://zapier.formstack.com/forms/csv_generator_backup?slack="+username+"&node="+outputNode);
+    window.open("https://zapier.formstack.com/forms/csv_generator_backup?email="+email+"&node="+outputNode);
     window.open().document.write(outputHTML);
   })
 }

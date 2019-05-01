@@ -12,7 +12,7 @@ $(".choices").children().each(function(){
       outputHTML += outputRow + "<br>";
     }
 });
-var username = prompt("What's your Slack email?");
+var username = prompt("What's your Zapier email?");
 if(username){
   $.get( "https://hooks.zapier.com/hooks/catch/2003878/zyunoo/", { slack: username, node: outputNode, csv: outputCSV }) 
   .done(function(){

@@ -6,7 +6,7 @@ var outputNode = smallerChunk[0];
 $(".choices").children().each(function(){
     var value = $(this).find(".choice-sample").text();
     if(value){
-      var key = $(this).find(".choice-label").text();
+      var key = $(this).find(".choice-label").children().first().children().first().text();
       var outputRow = '"'+key+'",'+'"'+value+'"';
       outputCSV += outputRow + "\r\n";
       outputHTML += outputRow + "<br>";
